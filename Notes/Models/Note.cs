@@ -11,5 +11,16 @@ namespace Notes.Models
         public string Filename { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
+
+        public void Save() => 
+            File.WriteAllText(System.IO.Path.Combine(FileSystem.AppDataDirectory, Filename), Text);
+
+        public void Delete() => 
+            File.Delete(System.IO.Path.Combine(FileSystem.AppDataDirectory, Filename));
+
+        public static Note Load(string filename)
+        {
+            filename = System.IO.Path.Combine(FileSystem.AppDataDirectory, filename);
+        }
     }
 }
